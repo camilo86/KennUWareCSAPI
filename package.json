@@ -1,0 +1,26 @@
+{
+  "name": "product-tickets-api",
+  "version": "1.0.0",
+  "description": "Easily manage product tickets for your clients",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/camilo86/ProductTicketsAPI.git"
+  },
+  "keywords": [
+    "API"
+  ],
+  "author": "Camilo Gonzalez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/camilo86/ProductTicketsAPI/issues"
+  },
+  "homepage": "https://github.com/camilo86/ProductTicketsAPI#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
