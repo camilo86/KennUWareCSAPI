@@ -12,4 +12,8 @@ router.get('/:agentId',
   [agentMiddleware.getByIdFromParams],
   agentController.get);
 
+router.put('/:agentId',
+  [agentMiddleware.getByIdFromParams],
+  agentController.put);
+
 module.exports = router;

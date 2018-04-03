@@ -20,3 +20,18 @@ exports.getAll = (req, res) => {
 exports.get = (req, res) => {
   return res.json(req.agent);
 };
+
+exports.put = async (req, res, next) => {
+  try {
+    const { firstName, lastName, email } = req.body;
+
+    req.agent.firstName = firstName || req.agent.firstName;
+    req.agent.lastName = lastName || req.agent.lastName;
+    req.agent.email = email || req.agent.email;
+
+    await req.agent.save();
+    return res.sendStatus(204);
+  } catch (e) {
+    return next(new errors.BadRequest('Could not update agent'));
+  }
+};

@@ -7,6 +7,12 @@ module.exports = ({ chai, app }) => {
       password: 'examplepassword'
     };
 
+    const agentUpdated = {
+      firstName: 'Camilo',
+      lastName: 'G',
+      email: 'camilog@gmail.com'
+    };
+
     it('Should create an agent', async () => {
       const response = await chai.request(app).post('/api/agents').send(agent);
 
@@ -32,6 +38,12 @@ module.exports = ({ chai, app }) => {
       response.body.firstName.should.equal(agent.firstName);
       response.body.lastName.should.equal(agent.lastName);
       response.body.email.should.equal(agent.email);
+    });
+
+    it('Should update agent', async () => {
+      const response = await chai.request(app).put(`/api/agents/${agent.id}`).send(agentUpdated);
+
+      response.status.should.equal(204);
     });
   });
 };
