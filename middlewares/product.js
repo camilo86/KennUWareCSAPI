@@ -9,3 +9,12 @@ exports.getAllProducts = async (req, res, next) => {
     return next(new errors.BadRequest('Could not get products'));
   }
 };
+
+exports.getByIdFromParams = async (req, res, next) => {
+  try {
+    req.product = await Product.findById(req.params.productId);
+    next();
+  } catch (e) {
+    return next(new errors.BadRequest('Could not get product'));
+  }
+};

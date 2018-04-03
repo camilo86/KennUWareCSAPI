@@ -8,4 +8,8 @@ router.get('/',
   [productMiddleware.getAllProducts],
   productController.getAll);
 
+router.get('/:productId',
+  [productMiddleware.getByIdFromParams],
+  productController.get);
+
 module.exports = router;
