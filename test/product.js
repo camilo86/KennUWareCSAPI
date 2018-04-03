@@ -57,4 +57,10 @@ describe('products', () => {
 
     response.status.should.equal(204);
   });
+
+  it('should delete a product', async () => {
+    const response = await chai.request(app).del(`/api/products/${product.id}`);
+
+    response.status.should.equal(204);
+  });
 });

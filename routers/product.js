@@ -16,4 +16,8 @@ router.put('/:productId',
   [productMiddleware.getByIdFromParams],
   productController.put);
 
+router.delete('/:productId',
+  [productMiddleware.getByIdFromParams],
+  productController.delete);
+
 module.exports = router;
