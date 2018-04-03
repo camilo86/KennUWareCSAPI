@@ -3,7 +3,7 @@ const Product = require('./../models/product');
 
 exports.getAllProducts = async (req, res, next) => {
   try {
-    req.products = await Product.find({});
+    req.products = await Product.find(req.query);
     next();
   } catch (e) {
     return next(new errors.BadRequest('Could not get products'));

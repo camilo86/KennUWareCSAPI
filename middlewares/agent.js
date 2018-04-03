@@ -3,7 +3,7 @@ const Agent = require('./../models/agent');
 
 exports.getAllAgents = async (req, res, next) => {
   try {
-    req.agents = await Agent.find({});
+    req.agents = await Agent.find(req.query);
     next();
   } catch (e) {
     return next(new errors.BadRequest('Could not get agents'));
