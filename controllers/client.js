@@ -15,3 +15,7 @@ exports.post = async (req, res, next) => {
 exports.getAll = async (req, res) => {
   return res.json(req.clients);
 };
+
+exports.get = async (req, res) => {
+  return res.json(req.client);
+};

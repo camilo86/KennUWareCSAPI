@@ -8,4 +8,8 @@ router.get('/',
   [clientMiddleware.getAllClients],
   clientController.getAll);
 
+router.get('/:clientId',
+  [clientMiddleware.getByIdFromParams],
+  clientController.get);
+
 module.exports = router;

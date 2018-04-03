@@ -9,3 +9,12 @@ exports.getAllClients = async (req, res, next) => {
     return next(new errors.BadRequest('Could not get clients'));
   }
 };
+
+exports.getByIdFromParams = async (req, res, next) => {
+  try {
+    req.client = await Client.findById(req.params.clientId);
+    next();
+  } catch (e) {
+    return next(new errors.NotFound('Could not find client'));
+  }
+};

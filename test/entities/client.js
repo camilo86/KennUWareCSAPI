@@ -24,5 +24,15 @@ module.exports = ({ chai, app }) => {
       response.status.should.equal(200);
       response.body.should.have.lengthOf(1);
     });
+
+    it('Should get a client by id', async () => {
+      const response = await chai.request(app).get(`/api/clients/${client.id}`);
+
+      response.status.should.equal(200);
+      response.body.id.should.equal(client.id);
+      response.body.firstName.should.equal(client.firstName);
+      response.body.lastName.should.equal(client.lastName);
+      response.body.email.should.equal(client.email);
+    });
   });
 };
