@@ -22,6 +22,10 @@ exports.get = (req, res) => {
   return res.json(req.client);
 };
 
+exports.getMe = (req, res) => {
+  return res.json(req.account);
+};
+
 exports.put = async (req, res, next) => {
   try {
     const { firstName, lastName, email } = req.body;

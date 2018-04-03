@@ -55,6 +55,16 @@ module.exports = ({ chai, app }) => {
       response.body.email.should.equal(client.email);
     });
 
+    it('Should get current client', async () => {
+      const response = await chai.request(app).get(`/api/clients/me`).set('x-access-token', client.token);
+
+      response.status.should.equal(200);
+      response.body.id.should.equal(client.id);
+      response.body.firstName.should.equal(client.firstName);
+      response.body.lastName.should.equal(client.lastName);
+      response.body.email.should.equal(client.email);
+    });
+
     it('Should update a client', async () => {
       const response = await chai.request(app).put(`/api/clients/${client.id}`).send(clientUpdated);
 
