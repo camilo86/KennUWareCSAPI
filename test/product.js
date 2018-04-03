@@ -3,11 +3,13 @@ const should = require('should');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { app, db } = require('./../app');
+const productSeed = require('./../seeds/product');
 
 process.env.NODE_ENV = 'testing';
 db.connection.on('open', () => {
   db.connection.db.dropDatabase();
 });
+productSeed();
 
 chai.use(chaiHttp);
 
@@ -39,7 +41,7 @@ describe('products', () => {
     const response = await chai.request(app).get('/api/products');
 
     response.status.should.equal(200);
-    response.body.should.have.lengthOf(1);
+    response.body.should.have.lengthOf(4);
   });
 
   it('should get a product by id', async () => {
