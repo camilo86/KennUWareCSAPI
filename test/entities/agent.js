@@ -1,4 +1,10 @@
+const agentSeed = require('./../../seeds/agent');
+
 module.exports = ({ chai, app }) => {
+  before(async () => {
+    await agentSeed();
+  });
+
   describe('Agents', () => {
     const agent = {
       firstName: 'Joseph',
@@ -28,7 +34,7 @@ module.exports = ({ chai, app }) => {
       const response = await chai.request(app).get('/api/agents');
 
       response.status.should.equal(200);
-      response.body.should.have.lengthOf(1);
+      response.body.should.have.lengthOf(4);
     });
 
     it('Should get an agent by id', async () => {
