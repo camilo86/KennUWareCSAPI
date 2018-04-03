@@ -17,5 +17,12 @@ module.exports = ({ chai, app }) => {
       response.body.email.should.equal(client.email);
       client.id = response.body.id;
     });
+
+    it('Should get all clients', async () => {
+      const response = await chai.request(app).get('/api/clients');
+
+      response.status.should.equal(200);
+      response.body.should.have.lengthOf(1);
+    });
   });
 };
