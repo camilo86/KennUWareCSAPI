@@ -1,9 +1,12 @@
 const productSeed = require('./../../seeds/product');
 
 module.exports = ({ chai, app }) => {
-  productSeed();
 
   describe('Products', () => {
+    before(async () => {
+      await productSeed();
+    });
+
     const product = {
       name: 'Model x watch',
       description: 'Very nice product',

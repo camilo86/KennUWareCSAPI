@@ -1,4 +1,10 @@
+const clientSeed = require('./../../seeds/client');
+
 module.exports = ({ chai, app }) => {
+  before(async () => {
+    await clientSeed();
+  });
+
   describe('Clients', () => {
     const client = {
       firstName: 'John',
@@ -28,7 +34,7 @@ module.exports = ({ chai, app }) => {
       const response = await chai.request(app).get('/api/clients');
 
       response.status.should.equal(200);
-      response.body.should.have.lengthOf(1);
+      response.body.should.have.lengthOf(4);
     });
 
     it('Should get a client by id', async () => {

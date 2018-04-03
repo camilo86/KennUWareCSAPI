@@ -25,7 +25,6 @@ module.exports = async () => {
       await Product.create(products[i]);
     }
   } catch (e) {
-    console.log(e);
     console.error('Could not seed product table');
     process.exit(1);
   }
