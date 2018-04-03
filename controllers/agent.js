@@ -1,4 +1,6 @@
 const errors = require('http-errors');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const Agent = require('./../models/agent');
 
 exports.post = async (req, res, next) => {
@@ -43,4 +45,24 @@ exports.delete = async (req, res, next) => {
   } catch (e) {
     return next(new errors.BadRequest('Could not delete agent'));
   }
+};
+
+exports.login = (req, res, next) => {
+  const { email, password } = req.body;
+  if(!email || !password) return next(new errors.BadRequest('email and/or password missing'));
+
+
+  Agent.findOne({ email }, function(error, agent) {
+    if(error || !agent) return next(new errors.NotFound('agent not found'));
+    if(!bcrypt.compareSync(password, agent.password)) return next(new errors.Forbidden('invalid email/password'));
+
+    jwt.sign({
+      id: agent.id,
+      role: 'agent'
+    }, process.env.SECRET, (error, token) => {
+      if(error) return next(new errors.BadRequest('failed to generate token'));
+
+      return res.json(token);
+    })
+  });
 };

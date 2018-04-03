@@ -20,4 +20,6 @@ router.delete('/:agentId',
   [agentMiddleware.getByIdFromParams],
   agentController.delete);
 
+router.post('/login', agentController.login);
+
 module.exports = router;
