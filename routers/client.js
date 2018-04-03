@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const clientController = require('./../controllers/client');
 const clientMiddleware = require('./../middlewares/client');
+const authMiddleware = require('./../middlewares/auth');
 
 router.post('/', clientController.post);
 
@@ -19,5 +20,7 @@ router.put('/:clientId',
 router.delete('/:clientId',
   [clientMiddleware.getByIdFromParams],
   clientController.delete);
+
+router.post('/login', clientController.login);
 
 module.exports = router;

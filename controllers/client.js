@@ -1,4 +1,6 @@
 const errors = require('http-errors');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const Client = require('./../models/client');
 
 exports.post = async (req, res, next) => {
@@ -42,4 +44,24 @@ exports.delete = async (req, res, next) => {
   } catch (e) {
     return next(new errors.BadRequest('Could not delete client'));
   }
+};
+
+exports.login = (req, res, next) => {
+  const { email, password } = req.body;
+  if(!email || !password) return next(new errors.BadRequest('email and/or password missing'));
+
+
+  Client.findOne({ email }, function(error, client) {
+    if(error || !client) return next(new errors.NotFound('client not found'));
+    if(!bcrypt.compareSync(password, client.password)) return next(new errors.Forbidden('invalid email/password'));
+
+    jwt.sign({
+      id: client.id,
+      role: 'client'
+    }, process.env.SECRET, (error, token) => {
+      if(error) return next(new errors.BadRequest('failed to generate token'));
+
+      return res.json({ token });
+    })
+  });
 };

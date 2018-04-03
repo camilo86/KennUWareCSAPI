@@ -30,6 +30,14 @@ module.exports = ({ chai, app }) => {
       client.id = response.body.id;
     });
 
+    it('Should login', async () => {
+      const response = await chai.request(app).post('/api/clients/login').send(client);
+
+      response.status.should.equal(200);
+      response.body.should.have.property('token');
+      client.token = response.body.token;
+    });
+
     it('Should get all clients', async () => {
       const response = await chai.request(app).get('/api/clients');
 
