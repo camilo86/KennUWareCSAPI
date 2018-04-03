@@ -28,6 +28,7 @@ module.exports = async () => {
       await Agent.create(agents[i]);
     }
   } catch (e) {
+    console.log(e);
     console.error('Could not seed agents table');
     process.exit(1);
   }
