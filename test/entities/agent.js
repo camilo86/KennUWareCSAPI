@@ -24,5 +24,14 @@ module.exports = ({ chai, app }) => {
       response.status.should.equal(200);
       response.body.should.have.lengthOf(1);
     });
+
+    it('Should get an agent by id', async () => {
+      const response = await chai.request(app).get(`/api/agents/${agent.id}`);
+
+      response.body.id.should.equal(agent.id);
+      response.body.firstName.should.equal(agent.firstName);
+      response.body.lastName.should.equal(agent.lastName);
+      response.body.email.should.equal(agent.email);
+    });
   });
 };

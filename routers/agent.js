@@ -8,4 +8,8 @@ router.get('/',
   [agentMiddleware.getAllAgents],
   agentController.getAll);
 
+router.get('/:agentId',
+  [agentMiddleware.getByIdFromParams],
+  agentController.get);
+
 module.exports = router;
