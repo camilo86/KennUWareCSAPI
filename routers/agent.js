@@ -16,4 +16,8 @@ router.put('/:agentId',
   [agentMiddleware.getByIdFromParams],
   agentController.put);
 
+router.delete('/:agentId',
+  [agentMiddleware.getByIdFromParams],
+  agentController.delete);
+
 module.exports = router;

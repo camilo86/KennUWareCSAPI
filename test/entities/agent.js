@@ -45,5 +45,11 @@ module.exports = ({ chai, app }) => {
 
       response.status.should.equal(204);
     });
+
+    it('Should delete an agent', async () => {
+      const response = await chai.request(app).del(`/api/agents/${agent.id}`);
+
+      response.status.should.equal(204);
+    });
   });
 };
