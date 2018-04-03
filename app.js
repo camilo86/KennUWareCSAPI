@@ -1,4 +1,5 @@
 const productRouter = require('./routers/product');
+const clientRouter = require('./routers/client');
 const express = require('express');
 const mongoose = require('mongoose');
 const errors = require('http-errors');
@@ -10,6 +11,7 @@ app.use(express.json());
 
 
 app.use('/api/products', productRouter);
+app.use('/api/clients', clientRouter);
 
 app.use((req, res, next) => {
   return next(new errors.NotFound('the enpoint you tried to access does not exist'));

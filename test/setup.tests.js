@@ -12,3 +12,4 @@ db.connection.on('open', () => {
 chai.use(chaiHttp);
 
 require('./entities/product')({ chai, app });
+require('./entities/client')({ chai, app });

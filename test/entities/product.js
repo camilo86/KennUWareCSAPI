@@ -3,7 +3,7 @@ const productSeed = require('./../../seeds/product');
 module.exports = ({ chai, app }) => {
   productSeed();
 
-  describe('products', () => {
+  describe('Products', () => {
     const product = {
       name: 'Model x watch',
       description: 'Very nice product',
