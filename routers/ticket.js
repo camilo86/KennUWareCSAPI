@@ -19,4 +19,8 @@ router.put('/:ticketId',
   [ticketMiddleware.getByIdFromParams],
   ticketController.put);
 
+router.delete('/:ticketId',
+  [ticketMiddleware.getByIdFromParams],
+  ticketController.delete);
+
 module.exports = router;
