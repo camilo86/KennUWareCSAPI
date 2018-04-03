@@ -9,8 +9,8 @@ db.connection.on('open', () => {
   db.connection.db.dropDatabase();
 });
 
-
 chai.use(chaiHttp);
 
 require('./entities/product')({ chai, app });
 require('./entities/client')({ chai, app });
+require('./entities/agent')({ chai, app });
