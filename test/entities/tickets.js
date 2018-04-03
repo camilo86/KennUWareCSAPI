@@ -10,7 +10,9 @@ module.exports = ({ chai, app }) => {
       title: 'My device burned up',
       description: 'Do I gotta buy a new one?',
       agentEmail: 'dann@man.com',
-      clientEmail: 'milo@man.com'
+      clientEmail: 'milo@man.com',
+      status: 'closed',
+      priority: 'spicy',
     };
 
     const client = {
@@ -30,7 +32,9 @@ module.exports = ({ chai, app }) => {
 
       response.status.should.equal(201);
       response.body.should.have.property('id');
+      response.body.should.have.property('opened');
       response.body.title.should.equal(ticket.title);
+      response.body.priority.should.equal('mild');
       response.body.description.should.equal(ticket.description);
       response.body.serialNumber.should.equal(ticket.serialNumber);
       ticket.id = response.body.id;

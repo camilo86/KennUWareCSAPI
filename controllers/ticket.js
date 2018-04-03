@@ -5,7 +5,7 @@ const Agent = require('./../models/agent');
 
 exports.post = async (req, res, next) => {
   try {
-    const inputs = { title, description, serialNumber, clientEmail } = req.body;
+    const inputs = { title, description, serialNumber, clientEmail, priority } = req.body;
 
     if(req.account.role === 'agent') {
       const client = await Client.findOne({ email: clientEmail });
@@ -17,7 +17,7 @@ exports.post = async (req, res, next) => {
       inputs.client = req.account.id;
     }
 
-    const ticket = await Ticket.create(inputs);
+    const ticket = await Ticket.create({...inputs, opened: new Date()});
     const ticketResult = await Ticket.findById(ticket.id).populate('agent').populate('client');
     return res.status(201).json(ticketResult);
   } catch (e) {
@@ -35,7 +35,7 @@ exports.get = (req, res) => {
 
 exports.put = async (req, res, next) => {
   try {
-    const inputs = { title, description, clientEmail, agentEmail } = req.body;
+    const inputs = { title, description, clientEmail, agentEmail, status, priority } = req.body;
 
     if(clientEmail) {
       const client = await Client.findOne({ email: clientEmail });
@@ -47,6 +47,12 @@ exports.put = async (req, res, next) => {
       inputs.agent = agent.id;
     }
 
+    if(inputs.status === 'closed') {
+      req.ticket.closed = new Date();
+    }
+
+    req.ticket.priority = inputs.priority || req.ticket.priority;
+    req.ticket.status = inputs.status || req.ticket.status;
     req.ticket.title = inputs.title || req.ticket.title;
     req.ticket.description = inputs.description || req.ticket.description;
     req.ticket.client = inputs.client || req.ticket.client;
