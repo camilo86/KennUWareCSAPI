@@ -12,4 +12,8 @@ router.get('/:clientId',
   [clientMiddleware.getByIdFromParams],
   clientController.get);
 
+router.put('/:clientId',
+  [clientMiddleware.getByIdFromParams],
+  clientController.put);
+
 module.exports = router;

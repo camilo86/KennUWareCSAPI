@@ -7,6 +7,12 @@ module.exports = ({ chai, app }) => {
       password: 'somepasswordhere'
     };
 
+    const clientUpdated = {
+      firstName: 'Camilo',
+      lastName: 'Gonzalez',
+      email: 'cgs.camilogonzalez@gmail.com',
+    };
+
     it('Should create a client', async () => {
       const response = await chai.request(app).post('/api/clients').send(client);
 
@@ -33,6 +39,12 @@ module.exports = ({ chai, app }) => {
       response.body.firstName.should.equal(client.firstName);
       response.body.lastName.should.equal(client.lastName);
       response.body.email.should.equal(client.email);
+    });
+
+    it('Should update a client', async () => {
+      const response = await chai.request(app).put(`/api/clients/${client.id}`).send(clientUpdated);
+
+      response.status.should.equal(204);
     });
   });
 };

@@ -12,10 +12,25 @@ exports.post = async (req, res, next) => {
   }
 };
 
-exports.getAll = async (req, res) => {
+exports.getAll = (req, res) => {
   return res.json(req.clients);
 };
 
-exports.get = async (req, res) => {
+exports.get = (req, res) => {
   return res.json(req.client);
+};
+
+exports.put = async (req, res, next) => {
+  try {
+    const { firstName, lastName, email } = req.body;
+
+    req.client.firstName = firstName || req.client.firstName;
+    req.client.lastName = lastName || req.client.lastName;
+    req.client.email = email || req.client.email;
+
+    await req.client.save();
+    return res.sendStatus(204);
+  } catch (e) {
+    return next(new errors.BadRequest('Could not update client'));
+  }
 };
