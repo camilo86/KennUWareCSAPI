@@ -53,6 +53,15 @@ module.exports = ({ chai, app }) => {
       response.body.email.should.equal(agent.email);
     });
 
+    it('Should get current agent', async () => {
+      const response = await chai.request(app).get(`/api/agents/me`).set('x-access-token', agent.token);
+
+      response.body.id.should.equal(agent.id);
+      response.body.firstName.should.equal(agent.firstName);
+      response.body.lastName.should.equal(agent.lastName);
+      response.body.email.should.equal(agent.email);
+    });
+
     it('Should update agent', async () => {
       const response = await chai.request(app).put(`/api/agents/${agent.id}`).send(agentUpdated);
 

@@ -13,7 +13,7 @@ exports.clientAuthRequired = (req, res, next) => {
     Client.findOne({ _id: decoded.id }, function(error, agent) {
       if(error || !agent) return next(new errors.NotFound('client not found'));
 
-      req.account = {...agent, role: 'client'};
+      req.account = {...agent.toJSON(), role: 'client'};
       next();
     });
   });
@@ -29,7 +29,7 @@ exports.agentAuthRequired = (req, res, next) => {
     Agent.findOne({ _id: decoded.id }, function(error, agent) {
       if(error || !agent) return next(new errors.NotFound('agent not found'));
 
-      req.account = {...agent, role: 'agent'};
+      req.account = {...agent.toJSON(), role: 'agent'};
       next();
     });
   });
