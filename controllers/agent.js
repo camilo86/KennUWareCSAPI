@@ -12,3 +12,7 @@ exports.post = async (req, res, next) => {
     return next(new errors.BadRequest('Could not create agent'));
   }
 };
+
+exports.getAll = (req, res) => {
+  return res.json(req.agents);
+};
