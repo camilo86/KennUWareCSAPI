@@ -14,3 +14,4 @@ chai.use(chaiHttp);
 require('./entities/product')({ chai, app });
 require('./entities/client')({ chai, app });
 require('./entities/agent')({ chai, app });
+require('./entities/tickets')({ chai, app });

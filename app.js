@@ -10,7 +10,8 @@ app.use(express.json());
 
 app.use('/api/products', require('./routers/product'));
 app.use('/api/clients', require('./routers/client'));
-app.use('/api/agents', require('./routers/agent'))
+app.use('/api/agents', require('./routers/agent'));
+app.use('/api/tickets', require('./routers/ticket'));
 
 app.use((req, res, next) => {
   return next(new errors.NotFound('the enpoint you tried to access does not exist'));
