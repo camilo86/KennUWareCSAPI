@@ -11,3 +11,7 @@ exports.post = async (req, res, next) => {
     return next(new errors.BadRequest('Could not create product'));
   }
 };
+
+exports.getAll = (req, res) => {
+  return res.json(req.products);
+};
