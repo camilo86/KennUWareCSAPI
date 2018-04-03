@@ -62,7 +62,7 @@ exports.login = (req, res, next) => {
     }, process.env.SECRET, (error, token) => {
       if(error) return next(new errors.BadRequest('failed to generate token'));
 
-      return res.json(token);
+      return res.json({ token });
     })
   });
 };
