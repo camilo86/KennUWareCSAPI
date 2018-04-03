@@ -21,7 +21,7 @@
     "url": "https://github.com/camilo86/ProductTicketsAPI/issues"
   },
   "engines": {
-    "node": "9.10.0"
+    "node": "8.10.0"
   },
   "homepage": "https://github.com/camilo86/ProductTicketsAPI#readme",
   "dependencies": {
