@@ -19,3 +19,19 @@ exports.getAll = (req, res) => {
 exports.get = (req, res) => {
   return res.json(req.product);
 }
+
+exports.put = async (req, res, next) => {
+  try {
+    const { name, description, serialNumber } = req.body;
+
+    req.product.name = name || req.product.name;
+    req.product.description = description || req.product.description;
+    req.product.serialNumber = serialNumber || req.product.serialNumber;
+
+    await req.product.save();
+    return res.sendStatus(204);
+
+  } catch (e) {
+    return next(new errors.BadRequest('Could not update product'));
+  }
+}

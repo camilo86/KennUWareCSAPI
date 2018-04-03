@@ -18,6 +18,12 @@ describe('products', () => {
     serialNumber: 'dmfeEMzU'
   };
 
+  const updatedProduct = {
+    name: 'Model y watch',
+    description: 'great product',
+    serialNumber: 'df569k3'
+  };
+
   it('should create a product', async () => {
     const response = await chai.request(app).post('/api/products').send(product);
 
@@ -36,7 +42,7 @@ describe('products', () => {
     response.body.should.have.lengthOf(1);
   });
 
-  it('should get a single product', async () => {
+  it('should get a product by id', async () => {
     const response = await chai.request(app).get(`/api/products/${product.id}`);
 
     response.status.should.equal(200);
@@ -44,5 +50,11 @@ describe('products', () => {
     response.body.name.should.equal(product.name);
     response.body.description.should.equal(product.description);
     response.body.serialNumber.should.equal(product.serialNumber);
+  });
+
+  it('should update product', async () => {
+    const response = await chai.request(app).put(`/api/products/${product.id}`).send(updatedProduct);
+
+    response.status.should.equal(204);
   });
 });

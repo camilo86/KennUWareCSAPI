@@ -12,4 +12,8 @@ router.get('/:productId',
   [productMiddleware.getByIdFromParams],
   productController.get);
 
+router.put('/:productId',
+  [productMiddleware.getByIdFromParams],
+  productController.put);
+
 module.exports = router;
