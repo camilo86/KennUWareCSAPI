@@ -13,7 +13,7 @@ agentSchema.pre('save', function(next) {
 
   const self = this;
   bcrypt.hash(self.password, 10, function(error, hash) {
-    if (error) return next(new Error(error));
+    if (error) return next(new Error('Could not safetly store agent'));
 
     self.password = hash;
     next();
