@@ -16,4 +16,8 @@ router.put('/:clientId',
   [clientMiddleware.getByIdFromParams],
   clientController.put);
 
+router.delete('/:clientId',
+  [clientMiddleware.getByIdFromParams],
+  clientController.delete);
+
 module.exports = router;

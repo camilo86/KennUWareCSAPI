@@ -46,5 +46,11 @@ module.exports = ({ chai, app }) => {
 
       response.status.should.equal(204);
     });
+
+    it('Should delete a client', async () => {
+      const response = await chai.request(app).del(`/api/clients/${client.id}`);
+
+      response.status.should.equal(204);
+    });
   });
 };

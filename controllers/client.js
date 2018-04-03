@@ -34,3 +34,12 @@ exports.put = async (req, res, next) => {
     return next(new errors.BadRequest('Could not update client'));
   }
 };
+
+exports.delete = async (req, res, next) => {
+  try {
+    await req.client.remove();
+    return res.sendStatus(204);
+  } catch (e) {
+    return next(new errors.BadRequest('Could not delete client'));
+  }
+};
