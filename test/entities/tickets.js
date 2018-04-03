@@ -26,6 +26,7 @@ module.exports = ({ chai, app }) => {
       response.body.title.should.equal(ticket.title);
       response.body.description.should.equal(ticket.description);
       response.body.serialNumber.should.equal(ticket.serialNumber);
+      ticket.id = response.body.id;
     });
 
     it('Should get all tickets', async () => {
@@ -33,6 +34,17 @@ module.exports = ({ chai, app }) => {
 
       response.status.should.equal(200);
       response.body.should.have.lengthOf(1);
+    });
+
+    it('Should get a ticket', async () => {
+      const response = await chai.request(app).get(`/api/tickets/${ticket.id}`);
+
+      response.status.should.equal(200);
+      response.body.should.have.property('id');
+      response.body.title.should.equal(ticket.title);
+      response.body.description.should.equal(ticket.description);
+      response.body.serialNumber.should.equal(ticket.serialNumber);
+      response.body.client.firstName.should.equal(client.firstName);
     });
   });
 };

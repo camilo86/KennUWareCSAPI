@@ -11,4 +11,8 @@ router.get('/',
   [ticketMiddleware.getAllTickets],
   ticketController.getAll);
 
+router.get('/:ticketId',
+  [ticketMiddleware.getByIdFromParams],
+  ticketController.get);
+
 module.exports = router;
