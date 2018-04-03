@@ -1,11 +1,13 @@
 const errors = require('http-errors');
-const Ticket = require('./../models/ticket');
+const Product = require('./../models/product');
 const Client = require('./../models/client');
 const Agent = require('./../models/agent');
+const Ticket = require('./../models/ticket');
 
 exports.post = async (req, res, next) => {
   try {
     const inputs = { title, description, serialNumber, clientEmail, priority } = req.body;
+    const product = await Product.findOne({ serialNumber });
 
     if(req.account.role === 'agent') {
       const client = await Client.findOne({ email: clientEmail });
@@ -17,8 +19,8 @@ exports.post = async (req, res, next) => {
       inputs.client = req.account.id;
     }
 
-    const ticket = await Ticket.create({...inputs, opened: new Date()});
-    const ticketResult = await Ticket.findById(ticket.id).populate('agent').populate('client');
+    const ticket = await Ticket.create({...inputs, product: product.id, opened: new Date()});
+    const ticketResult = await Ticket.findById(ticket.id).populate('product').populate('agent').populate('client');
     return res.status(201).json(ticketResult);
   } catch (e) {
     return next(new errors.BadRequest('Could not create ticket'));

@@ -3,7 +3,7 @@ module.exports = ({ chai, app }) => {
     const ticket = {
       title: 'My device wont turn on',
       description: 'What can I do man, my device wont turn on',
-      serialNumber: 'asdf50l'
+      serialNumber: 'bj5al30'
     };
 
     const ticketUpdated = {
@@ -36,7 +36,7 @@ module.exports = ({ chai, app }) => {
       response.body.title.should.equal(ticket.title);
       response.body.priority.should.equal('mild');
       response.body.description.should.equal(ticket.description);
-      response.body.serialNumber.should.equal(ticket.serialNumber);
+      response.body.product.serialNumber.should.equal(ticket.serialNumber);
       ticket.id = response.body.id;
     });
 
@@ -54,7 +54,7 @@ module.exports = ({ chai, app }) => {
       response.body.should.have.property('id');
       response.body.title.should.equal(ticket.title);
       response.body.description.should.equal(ticket.description);
-      response.body.serialNumber.should.equal(ticket.serialNumber);
+      response.body.product.serialNumber.should.equal(ticket.serialNumber);
       response.body.client.firstName.should.equal(client.firstName);
     });
 

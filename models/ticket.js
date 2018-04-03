@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const ticketSchema = new mongoose.Schema({
   title: { type: mongoose.Schema.Types.String, required: true },
   description: { type: mongoose.Schema.Types.String, required: false },
-  serialNumber: { type: mongoose.Schema.Types.String, required: true },
+  product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
   agent: { type: mongoose.Schema.Types.ObjectId, ref: 'Agent' },
   client: { type: mongoose.Schema.Types.ObjectId, ref: 'Client' },
   status: { type: mongoose.Schema.Types.String, default: 'opened' },
@@ -18,7 +18,7 @@ ticketSchema.methods.toJSON = function() {
     id: this._id,
     title: this.title,
     description: this.description,
-    serialNumber: this.serialNumber,
+    product: this.product,
     agent: this.agent,
     client: this.client,
     status: this.status,
