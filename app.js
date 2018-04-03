@@ -1,12 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const errors = require('http-errors');
+const cors = require('cors');
 const db = require('./config');
 const app = express();
 
 // app settings
+app.use(cors());
 app.use(express.json());
-
 
 app.use('/api/products', require('./routers/product'));
 app.use('/api/clients', require('./routers/client'));
