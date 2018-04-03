@@ -6,6 +6,13 @@ module.exports = ({ chai, app }) => {
       serialNumber: 'asdf50l'
     };
 
+    const ticketUpdated = {
+      title: 'My device burned up',
+      description: 'Do I gotta buy a new one?',
+      agentEmail: 'dann@man.com',
+      clientEmail: 'milo@man.com'
+    };
+
     const client = {
       firstName: 'David',
       lastName: 'DD',
@@ -45,6 +52,12 @@ module.exports = ({ chai, app }) => {
       response.body.description.should.equal(ticket.description);
       response.body.serialNumber.should.equal(ticket.serialNumber);
       response.body.client.firstName.should.equal(client.firstName);
+    });
+
+    it('Should update a ticket', async () => {
+      const response = await chai.request(app).put(`/api/tickets/${ticket.id}`).send(ticketUpdated);
+
+      response.status.should.equal(204);
     });
   });
 };

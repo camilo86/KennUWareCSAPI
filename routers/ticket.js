@@ -15,4 +15,8 @@ router.get('/:ticketId',
   [ticketMiddleware.getByIdFromParams],
   ticketController.get);
 
+router.put('/:ticketId',
+  [ticketMiddleware.getByIdFromParams],
+  ticketController.put);
+
 module.exports = router;
