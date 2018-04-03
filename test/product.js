@@ -28,4 +28,11 @@ describe('products', () => {
     response.body.serialNumber.should.equal(product.serialNumber);
     product.id = response.body.id;
   });
+
+  it('should get all products', async () => {
+    const response = await chai.request(app).get('/api/products');
+
+    response.status.should.equal(200);
+    response.body.should.have.lengthOf(1);
+  });
 });

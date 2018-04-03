@@ -1,3 +1,4 @@
+const errors = require('http-errors');
 const Product = require('./../models/product');
 
 exports.post = async (req, res, next) => {
@@ -7,7 +8,6 @@ exports.post = async (req, res, next) => {
 
     return res.status(201).json(product);
   } catch(e) {
-    console.log(e);
-    return res.status(400).json({ message: 'Could not create product' });
+    return next(new errors.BadRequest('Could not create product'));
   }
 };
